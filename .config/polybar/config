@@ -1,0 +1,147 @@
+[colors]
+foreground     = #F8F8F2
+foreground-alt = #666666
+background         = #282A36
+red    = #FF0000
+green  = #00FF00
+blue   = #0000FF
+yellow = #FFFF00
+
+[bar/topbar]
+enable-ipc = true
+wm-restack = bspwm
+height = 22
+foreground = ${colors.foreground}
+background = ${colors.background}
+font-0 = SauceCodePro Nerd Font:style=Bold:size=10;2
+font-1 = FontAwesome:style=Regular:pixelsize=10;3
+font-2 = Font Awesome 5 Brands:pixelsize=11;3
+font-3 = Font Awesome 5 Free Regular:pixelsize=10;3
+font-4 = Font Awesome 5 Free Solid:style=Solid:pixelsize:10;3
+padding-right = 1
+module-margin = 1
+modules-left   = bspwm 
+modules-center = date
+modules-right  = ethernet wlan cpu temperature memory xkeyboard battery xbacklight alsa
+cursor-click = pointer
+tray-position = right
+
+[module/bspwm]
+type = internal/bspwm
+label-focused       = %name%
+label-focused-empty = ·
+label-occupied      = %name%
+label-urgent        = %name%
+label-empty         = ·
+label-focused-padding        = 1
+label-focused-empty-padding  = 1
+label-occupied-padding       = 1
+label-urgent-padding         = 1
+label-empty-padding          = 1
+label-focused-foreground       = ${colors.background}
+label-focused-background       = ${colors.foreground}
+label-focused-empty-foreground = ${colors.background}
+label-focused-empty-background = ${colors.foreground}
+label-urgent-foreground        = ${colors.red}
+
+[module/date]
+type = internal/date
+interval = 1
+label = %time% - %date%
+time     = %R
+date     = %a, %b %d
+time-alt = %T
+date-alt = %A, %B %d, %Y
+
+[module/ethernet]
+type = internal/network
+interface = ${env:ethernetcard}
+format-connected-prefix    = " "
+label-connected         = %local_ip%
+
+[module/wlan]
+type = internal/network
+interface = ${env:wificard}
+format-connected    = %{A1:dmenu-wifi:}<label-connected>%{A}
+format-disconnected = %{A1:dmenu-wifi:}<label-disconnected>%{A}
+format-connected-prefix    = "直 "
+format-disconnected-prefix = "睊 "
+format-disconnected-prefix-foreground = ${colors.red}
+label-connected         = %essid%
+label-disconnected      = Disconnected
+label-disconnected-foreground = ${colors.red}
+
+[module/cpu]
+type = internal/cpu
+format-prefix = " "
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = ${env:cputhermalzone}
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+label-warn-foreground = ${colors.red}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+[module/memory]
+type = internal/memory
+format-prefix = "﬙ "
+label         = %gb_used%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+blacklist-2 = caps lock
+
+format-prefix = "  "
+label-layout = %layout%
+format-background = #38383c
+format-padding = 3
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+format-discharging = <ramp-capacity> <label-discharging>
+format-charging    = <animation-charging> <label-charging>
+format-full        = <ramp-capacity> <label-full>
+format-charging-foreground = ${colors.yellow}
+format-full-foreground     = ${colors.green}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+animation-charging-framerate = 1000
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+[module/alsa]
+type = internal/alsa
+format-volume = <ramp-volume> <bar-volume>
+format-muted-prefix = "ﱝ "
+label-muted = sound muted
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+bar-volume-width     = 11
+bar-volume-indicator =
+bar-volume-fill      = -
+bar-volume-empty     = -
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/xbacklight]
+type = internal/xbacklight
+format = <ramp> <label>
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
